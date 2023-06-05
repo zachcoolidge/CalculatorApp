@@ -42,6 +42,7 @@ public class Expression {
                     }
                 }
                 num += c;
+
                 // captures the entire number by looping until a non-digit or decimal point is encountered
                 while ((i + 1 < expString.length()) && (Character.isDigit(expString.charAt(i + 1)) || expString.charAt(i + 1) == '.')) {
 
@@ -49,6 +50,12 @@ public class Expression {
                     i++;
                 }
                 if (i < expString.length() - 1 && expString.charAt(i + 1) == '(') {
+                    while (!brackOpStack.isEmpty() && !Utility.higher_precedence("*", brackOpStack.peek())) {
+                        eval_queue.add(brackOpStack.pop());
+                    }
+                    brackOpStack.push("*");
+                }
+                if(i<expString.length()-1 && Character.isAlphabetic(expString.charAt(i+1))){
                     while (!brackOpStack.isEmpty() && !Utility.higher_precedence("*", brackOpStack.peek())) {
                         eval_queue.add(brackOpStack.pop());
                     }
