@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <inset
+            android:insetRight="-10dp"
+            android:insetTop="-10dp"
+            android:insetLeft="-10dp">
+
+            <shape android:shape="rectangle">
+                <corners
+                    android:bottomLeftRadius="4dp"
+                    android:bottomRightRadius="0dp"
+                    android:topLeftRadius="4dp"
+                    android:topRightRadius="0dp" />
+                <stroke
+                    android:width="5dp"
+                    android:color="#70b23f" />
+                <solid android:color="@android:color/transparent" />
+            </shape>
+
+        </inset>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="0dp" android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</selector>
+<!-- https://stackoverflow.com/questions/9211208/how-to-draw-border-on-just-one-side-of-a-linear-layout-->

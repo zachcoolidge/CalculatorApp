@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/history_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </ListView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+
+        <EditText
+            android:id="@+id/editText_input"
+            android:layout_width="244dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/operator_box"
+            android:gravity="center_vertical|start"
+            android:maxLines="1"
+            android:textSize="20sp"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/operator_box"
+            android:gravity="center_vertical|end"
+            android:textSize="20sp"
+            android:maxLength="13"/>
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:id="@+id/main_screen_layout"
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:columnCount="8"
+        android:rowCount="6">
+
+        <Button
+            android:id="@+id/button_backspace"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:layout_column="7"
+            android:onClick="backspaceButtonClick"
+            android:textSize="17sp"
+            android:text="⌫" />
+        <Button
+            android:id="@+id/button_back"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:layout_column="7"
+            android:onClick="backButtonClick"
+            android:textSize="17sp"
+            android:text="←" />
+        <Button
+            android:id="@+id/button_forward"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:layout_column="7"
+            android:onClick="forwardButtonClick"
+            android:textSize="17sp"
+            android:text="→" />
+        <Button
+            android:id="@+id/button_leftpar"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:onClick="leftparButtonClick"
+            android:textSize="17sp"
+            android:text="(" />
+        <Button
+            android:id="@+id/button_rightpar"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:layout_column="1"
+            android:onClick="rightparButtonClick"
+            android:textSize="17sp"
+            android:text=")" />
+        <Button
+            android:id="@+id/button_func"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="@drawable/button_selector"
+            android:onClick="funcButtonClick"
+            android:padding="10dp"
+            android:text="func"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            tools:ignore="TextSizeCheck" />
+        <Button
+            android:id="@+id/button_derivative"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="@drawable/button_selector"
+            android:onClick="derButtonClick"
+            android:padding="10dp"
+            android:text="dx"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            tools:ignore="DuplicateIds,TextSizeCheck" />
+        <Button
+            android:id="@+id/button_integral"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:background="@drawable/button_selector"
+            android:onClick="intButtonClick"
+            android:padding="10dp"
+            android:text="∫"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            tools:ignore="DuplicateIds,TextSizeCheck" />
+        <Button
+            android:id="@+id/button_sqrt"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:onClick="sqrtButtonClick"
+            android:textSize="13sp"
+            android:text="sqrt"
+            tools:ignore="DuplicateIds,TextSizeCheck"/>
+        <Button
+            android:id="@+id/button_pi"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:onClick="piButtonClick"
+            android:textSize="17sp"
+
+            android:textAllCaps="false"
+            android:text="@string/pi" />
+        <Button
+            android:id="@+id/button_eulers"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:onClick="eulerButtonClick"
+            android:layout_column="1"
+            android:textAllCaps="false"
+            android:text="e" />
+        <Button
+            android:id="@+id/button_exponent"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:onClick="exponentButtonClick"
+            android:layout_column="0"
+            android:text="^" />
+        <Button
+            android:id="@+id/button_1"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:onClick="oneButtonClick"
+            android:layout_column="3"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/button_2"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:layout_column="4"
+            android:onClick="twoButtonClick"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/button_3"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:layout_column="5"
+            android:onClick="threeButtonClick"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:onClick="addButtonClick"
+            android:layout_column="6"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/button_4"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:onClick="fourButtonClick"
+            android:layout_column="3"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/button_5"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:onClick="fiveButtonClick"
+            android:layout_column="4"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/button_6"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:onClick="sixButtonClick"
+            android:layout_column="5"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/button_subtract"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:onClick="subButtonClick"
+            android:layout_column="6"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/button_7"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:onClick="sevenButtonClick"
+            android:layout_column="3"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/button_8"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:onClick="eightButtonClick"
+            android:layout_column="4"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/button_9"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:onClick="nineButtonClick"
+            android:layout_column="5"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/button_multiply"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:layout_column="6"
+            android:onClick="multButtonClick"
+            android:text="*" />
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="50dp"
+            android:layout_row="0"
+            android:layout_column="6"
+            android:onClick="saveButtonClick"
+            android:text="⏏" />
+
+        <Button
+            android:id="@+id/button_clear"
+            android:layout_width="50dp"
+            android:layout_row="0"
+            android:layout_column="7"
+            android:onClick="clearButtonClick"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/button_0"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:onClick="zeroButtonClick"
+            android:layout_column="3"
+            android:text="0" />
+        <Button
+            android:id="@+id/button_fact"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:onClick="factButtonClick"
+            android:layout_column="0"
+            android:text="!" />
+
+        <Button
+            android:id="@+id/button_decimal"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:layout_column="4"
+            android:onClick="decimalButtonClick"
+            android:text="." />
+
+        <Button
+            android:id="@+id/button_ans"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:layout_column="5"
+            android:onClick="ansButtonClick"
+            android:text="ans"
+            android:textSize="12dp"
+            tools:ignore="TextSizeCheck" />
+
+        <Button
+            android:id="@+id/button_divide"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:layout_column="6"
+            android:onClick="divButtonClick"
+            android:text="/" />
+<!--
+        <Button
+            android:id="@+id/button_equals"
+            android:layout_width="50dp"
+            android:layout_row="5"
+            android:layout_column="7"
+            android:onClick="equalsButton"
+            android:text="=" />
+-->
+        <!-- TextView for input and output -->
+
+    </GridLayout>
+    <GridLayout
+        android:id="@+id/func_screen_layout"
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:columnCount="6"
+        android:rowCount="6"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false">
+
+        <!-- Add buttons for trigonometric functions, sqrt, log, ln, and abs -->
+
+        <Button
+            android:id="@+id/button_integral"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:background="@drawable/button_selector"
+            android:onClick="intButtonClick"
+            android:padding="10dp"
+            android:text="∫"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            tools:ignore="DuplicateIds,TextSizeCheck" />
+        <Button
+            android:id="@+id/button_derivative"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="@drawable/button_selector"
+            android:onClick="derButtonClick"
+            android:padding="10dp"
+            android:text="dx"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            tools:ignore="DuplicateIds,TextSizeCheck" />
+
+        <Button
+            android:id="@+id/button_123"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="@drawable/button_selector"
+            android:onClick="funcButtonClick"
+            android:padding="10dp"
+            android:text="123"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
+            android:textStyle="normal"
+            tools:ignore="TextSizeCheck" />
+
+        <Button
+            android:id="@+id/button_ln"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:onClick="lnButtonClick"
+            android:text="ln"
+            android:textAllCaps="false"
+            android:textSize="13sp"
+            tools:ignore="DuplicateClickableBoundsCheck" />
+        <Button
+            android:id="@+id/button_sqrt"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:onClick="sqrtButtonClick"
+            android:textSize="13sp"
+            android:text="sqrt"
+            tools:ignore="DuplicateIds,TextSizeCheck"/>
+        <Button
+            android:id="@+id/button_log"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:onClick="logButtonClick"
+            android:textSize="13sp"
+            android:text="log" />
+        <Button
+            android:id="@+id/button_abs"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:onClick="absButtonClick"
+            android:textSize="13sp"
+            android:text="abs" />
+        <Button
+            android:id="@+id/button_sec"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="1"
+            android:layout_column="4"
+            android:onClick="secButtonClick"
+            android:textSize="13sp"
+            android:text="sec" />
+        <Button
+            android:id="@+id/button_csc"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:layout_column="4"
+            android:onClick="cscButtonClick"
+            android:textSize="13sp"
+            android:text="csc" />
+        <TextView
+        android:id="@+id/blank"
+        android:textAllCaps="false"
+        android:layout_width="50dp"
+        android:layout_row="3"
+        android:layout_column="3"
+        android:textSize="13sp"
+        android:text=""/>
+        <Button
+            android:id="@+id/button_cot"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:layout_column="4"
+            android:onClick="cotButtonClick"
+            android:textSize="13sp"
+            android:text="cot" />
+        <Button
+            android:id="@+id/button_tan"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:onClick="tanButtonClick"
+            android:textSize="13sp"
+            android:text="tan" />
+        <Button
+            android:id="@+id/button_cos"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:onClick="cosButtonClick"
+            android:textSize="13sp"
+            android:text="cos" />
+        <Button
+            android:id="@+id/button_sin"
+            android:textAllCaps="false"
+            android:layout_width="50dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:onClick="sinButtonClick"
+            android:textSize="13sp"
+            android:text="sin" />
+
+        <!-- Add more buttons here -->
+
+    </GridLayout>
+
+
+</LinearLayout>
+

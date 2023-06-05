@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Final Calculator App</string>
+    <string name="lcm">LCM</string>
+    <string name="gcd">GCD</string>
+    <string name="divisibility">divisibility</string>
+    <string name="mod">%</string>
+    <string name="coprime">coprime</string>
+    <string name="divide">/</string>
+    <string name="enter_input">Enter input</string>
+    <string name="enter_input2">Enter input</string>
+    <string name="result">Result</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">x</string>
+    <string name="reset">reset</string>
+    <string name ="pi">&#960;</string>
+</resources>
