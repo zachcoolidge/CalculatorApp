@@ -1,41 +1,32 @@
 package com.example.finalcalculatorapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Queue;
-//TODO - validation, scientific notation for numbers < -1000000
+//TODO - scientific notation for numbers < -1000000, fix the purple outline around input dx
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // telling java where to look in the xml file
+
+        //initialize variables
         result = (TextView) findViewById((R.id.result));
         input = (EditText) findViewById(R.id.editText_input);
         input.requestFocus();
@@ -61,40 +54,106 @@ public class MainActivity extends AppCompatActivity {
         funcScreenLayout = findViewById(R.id.func_screen_layout);
         mainScreenLayout = findViewById(R.id.main_screen_layout);
         funcScreenLayout.setVisibility(View.GONE);
-        ;
-        SQL_Database sqlDB = new SQL_Database(this);
-        // Assuming you have the following ArrayList of HashMap<String, Double>
-        ArrayList<HashMap<String, Double>> data = sqlDB.getAllExp();
 
-        // Get a reference to your ListView
-        ListView listView = findViewById(R.id.history_listview);
 
-        // Create a custom ArrayAdapter to populate the ListView
-        ArrayAdapter<HashMap<String, Double>> adapter = new ArrayAdapter<HashMap<String, Double>>(this, R.layout.explistentry, R.id.exp, data) {
+        RecyclerView recyclerView = findViewById(R.id.history_listview);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+        layoutManager.setStackFromEnd(true); //acts like a queue
+        recyclerView.setLayoutManager(layoutManager);
+
+// Sample data
+        List<ExpressionItem> items = new ArrayList<>();
+
+
+// Set the custom adapter
+        ExpressionAdapter.OnItemClickListener onItemClickListener = new ExpressionAdapter.OnItemClickListener() {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                // Get the HashMap at the current position
-                HashMap<String, Double> item = getItem(position);
-
-                // Get the key and value from the HashMap
-                String expression = item.keySet().iterator().next();
-                Double value = item.get(expression);
-
-                // Set the expression and value in the TextViews of the ListView item
-                TextView expressionTextView = view.findViewById(R.id.exp);
-                TextView valueTextView = view.findViewById(R.id.value);
-
-                expressionTextView.setText(expression);
-                valueTextView.setText(String.valueOf(value));
-
-                return view;
+            public void onItemClick(ExpressionItem item) {
+                // Handle the click event here.
+                // 'item' is the ExpressionItem object of the clicked item.
+                Toast.makeText(MainActivity.this, "Clicked: " + item.getExpression(), Toast.LENGTH_SHORT).show();
+                ans = item.getValue();
+                EditText selectedEditText = (EditText) findViewById(getCurrentFocus().getId());
+                int cursorPosition = selectedEditText.getSelectionStart();
+                // Get the text from the selected EditText field
+                Editable editableText = selectedEditText.getText();
+                // Insert "0" at the cursor position
+                if(ans!=null) {
+                    editableText.insert(cursorPosition, ans);
+                    selectedEditText.setSelection(cursorPosition + ans.length());
+                }
+                else{
+                    //TODO -- snackbar error
+                }
             }
-
         };
-        listView.setAdapter(adapter);
-        closeKeyboard();
+
+        ExpressionAdapter adapter = new ExpressionAdapter(items, onItemClickListener);
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+        Button equals = findViewById(R.id.button_equals);
+
+        equals.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String expression = input.getText().toString();
+                Expression in = new Expression(expression);
+                Queue exp = in.construct_post();
+                Double val = null;
+                try {
+                    val = Expression.evaluate_post_fix(exp);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                pre_comp_ans.put(exp + "", val);
+                ans=Double.toString(val);
+                items.add(new ExpressionItem(expression, ans));
+                //items.add(item);
+
+                input.setText("");
+                result.setText("");
+                adapter.notifyDataSetChanged();
+            }
+        });
+//        SQL_Database sqlDB = new SQL_Database(this);
+//        // Assuming you have the following ArrayList of HashMap<String, Double>
+//        ArrayList<HashMap<String, Double>> data = sqlDB.getAllExp();
+//
+//        // Get a reference to your ListView
+//        ListView listView = findViewById(R.id.history_listview);
+//
+//        // Create a custom ArrayAdapter to populate the ListView
+//        ArrayAdapter<HashMap<String, Double>> adapter = new ArrayAdapter<HashMap<String, Double>>(this, R.layout.explistentry, R.id.exp, data) {
+//            @Override
+//            public View getView(int position, View convertView, ViewGroup parent) {
+//                View view = super.getView(position, convertView, parent);
+//
+//                // Get the HashMap at the current position
+//                HashMap<String, Double> item = getItem(position);
+//
+//                // Get the key and value from the HashMap
+//                String expression = item.keySet().iterator().next();
+//                Double value = item.get(expression);
+//
+//                // Set the expression and value in the TextViews of the ListView item
+//                TextView expressionTextView = view.findViewById(R.id.exp);
+//                TextView valueTextView = view.findViewById(R.id.value);
+//
+//                expressionTextView.setText(expression);
+//                valueTextView.setText(String.valueOf(value));
+//
+//                return view;
+//            }
+//
+//        };
+//        listView.setAdapter(adapter);
+//        closeKeyboard();
         Button funcButton = findViewById(R.id.button_func);
         funcButton.setOnClickListener(v -> {
             if (selectedFuncButton != null) {
@@ -114,6 +173,9 @@ public class MainActivity extends AppCompatActivity {
             mainScreenLayout.setVisibility(View.VISIBLE);
             funcScreenLayout.setVisibility(View.GONE);
         });
+
+
+
         EditText editText = findViewById(R.id.editText_input);
         editText.setEllipsize(TextUtils.TruncateAt.START);
 
@@ -151,18 +213,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    /*public void equalsButton(View view) throws Exception {
-        String in = input.getText().toString();
-        Queue exp = PostFixConstruction.construct_post(in);
-        Double val = PostFixEval.evaluate_post_fix(exp);
-        pre_comp_ans.put(exp + "", val);
-        ans=Double.toString(val);
-        result.setText(Double.toString(val));
-        //input.setText("");
-        //result.setText("");
-    }
 
-     */
+//     public void equalsButton(View view) throws Exception {
+//        String in = input.getText().toString();
+//        ExpressionParse input = new ExpressionParse(in);
+//        Queue exp = input.construct_post();
+//        Double val = ExpressionParse.evaluate_post_fix(exp);
+//        pre_comp_ans.put(exp + "", val);
+//        ans=Double.toString(val);
+//        String item = exp + " : " + val;
+//        //items.add(item);
+//        result.setText(Double.toString(val));
+//        //input.setText("");
+//        //result.setText("");
+//    }
+
+
+
 public void zeroButtonClick(View view) {
     // Get the currently selected EditText field
     EditText selectedEditText = (EditText) findViewById(getCurrentFocus().getId());
@@ -403,10 +470,15 @@ public void zeroButtonClick(View view) {
 
 
     public void derButtonClick(View view){
-
+        Intent theIntent = new Intent(getApplication(), DerivativeActivity.class);
+        startActivity(theIntent);
     }
     public void intButtonClick(View view){
-        Intent theIntent = new Intent(getApplication(), Integral.class);
+        Intent theIntent = new Intent(getApplication(), IntegralActivity.class);
+        startActivity(theIntent);
+    }
+    public void equationButtonClick(View view){
+        Intent theIntent = new Intent(getApplication(), EquationActivity.class);
         startActivity(theIntent);
     }
     public void ansButtonClick(View view){
@@ -414,7 +486,6 @@ public void zeroButtonClick(View view) {
         int cursorPosition = selectedEditText.getSelectionStart();
         // Get the text from the selected EditText field
         Editable editableText = selectedEditText.getText();
-
         // Insert "0" at the cursor position
         if(ans!=null) {
             editableText.insert(cursorPosition, ans);
@@ -533,6 +604,32 @@ public void zeroButtonClick(View view) {
         editableText.insert(cursorPosition, "!");
         selectedEditText.setSelection(cursorPosition + 1);
     }
+
+    /**
+     * This function will save the solution to a list view layout on top of the screen.
+     * It will take in the solution as a String parameter and update the list view with the new solution.
+     * @param solution The solution to be saved and displayed in the list view
+     */
+    public void saveSolutionToListView(String solution){
+        // Get a reference to the list view
+        ListView listView = findViewById(R.id.history_listview);
+
+        // Create a new array adapter with the current list items
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) listView.getAdapter();
+
+        // If the adapter is null, create a new one
+        if(adapter == null){
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
+            listView.setAdapter(adapter);
+        }
+
+        // Add the new solution to the adapter
+        adapter.add(solution);
+
+        // Notify the adapter th at the data has changed
+        adapter.notifyDataSetChanged();
+    }
+
 
     private void closeKeyboard(){
         View view = this.getCurrentFocus();

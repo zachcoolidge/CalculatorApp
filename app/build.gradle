@@ -26,18 +26,41 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        // Fix duplicate resources
+        pickFirst '**/*.xsd'
+        pickFirst 'META-INF/*.md'
+
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
+
 
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
-
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation files('C:\\Users\\zachc\\AndroidStudioProjects\\FinalCalculatorApp\\app\\libs\\sqlite-jdbc-3.36.0.3.jar')
-    implementation files('C:\\Users\\zachc\\AndroidStudioProjects\\FinalCalculatorApp\\app\\libs\\sqlite-jdbc-3.36.0.3.jar')
-    implementation files('C:\\Users\\zachc\\AndroidStudioProjects\\FinalCalculatorApp\\app\\libs\\exp4j-0.4.8.jar')
+    implementation files('C:/Users/zachc/AndroidStudioProjects/FinalCalculatorApp/app/libs/sqlite-jdbc-3.36.0.3.jar')
+    implementation files('C:/Users/zachc/AndroidStudioProjects/FinalCalculatorApp/app/libs/sqlite-jdbc-3.36.0.3.jar')
+    implementation files('C:/Users/zachc/AndroidStudioProjects/FinalCalculatorApp/app/libs/exp4j-0.4.8.jar')
+    //implementation 'org.matheclipse:matheclipse-core:2.0.0'
+//    implementation 'org.matheclipse:matheclipse-core:3.0.0-SNAPSHOT'
+//    implementation 'org.matheclipse:matheclipse-gpl:3.0.0-SNAPSHOT'
+
+    implementation 'ru.noties:jlatexmath-android:0.2.0'
+    // for Cyrillic symbols
+    implementation 'ru.noties:jlatexmath-android-font-cyrillic:0.2.0'
+    // for Greek symbols
+    implementation 'ru.noties:jlatexmath-android-font-greek:0.2.0'
+    //implementation files('C:\\Users\\zachc\\Downloads\\matheclipse-gpl-2.0.0.jar')
+    //implementation files('C:\\Users\\zachc\\Downloads\\matheclipse-logging-2.0.0.jar')
+    //implementation files('C:\\Users\\zachc\\Downloads\\matheclipse-parser-2.0.0 (1).jar')
+    //implementation files('C:/Users/zachc/Downloads/log4j-api-2.1.jar')
+    //implementation files('C:\\Users\\zachc\\AndroidStudioProjects\\FinalCalculatorApp\\app\\libs\\matheclipse-core-2.0.0.jar')
+    implementation files('C:\\Users\\zachc\\Downloads\\symja_android_library-full-release.aar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+

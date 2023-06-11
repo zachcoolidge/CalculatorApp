@@ -5,13 +5,15 @@ import static com.example.finalcalculatorapp.Utility.isInt;
 import static com.example.finalcalculatorapp.Utility.isNumeric;
 import static com.example.finalcalculatorapp.Utility.recFact;
 
+import android.util.Log;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class Expression {
+public class Expression {//todo - add functionality to have e and pi multiply when put next to eachother
     private String expString;
     public Expression(String expression){
         expString=expression;
@@ -159,11 +161,13 @@ public class Expression {
      */
     @SuppressWarnings("ConstantConditions")
     public static double evaluate_post_fix(Queue<String> queue) throws Exception{
-
+        //todo - large factorials showing negative
         Stack<Double> nums = new Stack<>();
         StringBuilder exp = new StringBuilder();
-        if(MainActivity.pre_comp_ans.containsKey(queue+""))
-            return MainActivity.pre_comp_ans.get(queue+"");
+        if(MainActivity.pre_comp_ans.containsKey(queue+"")) {
+            Log.d("Expression found", "Found");
+            return MainActivity.pre_comp_ans.get(queue + "");
+        }
             //result.setText(Double.toString(MainActivity.pre_comp_ans.get(queue+"")));
         else{
             for(String elmnt: queue) {

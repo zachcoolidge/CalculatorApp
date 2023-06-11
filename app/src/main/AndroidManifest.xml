@@ -11,7 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalCalculatorApp"
         tools:targetApi="31">
-        <activity android:name=".Integral"
+        <activity android:name=".IntegralActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".DerivativeActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".EquationActivity"
             android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity

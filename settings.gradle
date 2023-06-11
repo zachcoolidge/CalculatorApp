@@ -10,6 +10,18 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+        maven {
+            url 'https://repository.apache.org/snapshots'
+        }
+        maven {
+            url 'https://packages.orekit.org/repository/maven-public/'
+        }
+//        maven {
+//            url 'https://https://central.sonatype.com/artifact/org.matheclipse/matheclipse-core/2.0.0'
+//        }
     }
 }
 rootProject.name = "Final Calculator App"

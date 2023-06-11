@@ -4,8 +4,12 @@ import android.util.Log;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-
+import org.matheclipse.core.form.output.OutputFormFactory;
+import org.matheclipse.core.form.tex.TeXFormFactory;
 import java.util.function.Function;
+import org.matheclipse.core.eval.ExprEvaluator;
+import org.matheclipse.core.expression.F;
+import org.matheclipse.core.interfaces.IExpr;
 
 public class IntegralEvaluate {
     private static double simp_comp_eval(Function<Double, Double> function, double a, double b, int numIntervals) {
@@ -26,10 +30,7 @@ public class IntegralEvaluate {
 
     public static Double eval(String exp, Double a, Double b) {
         // Define the function to integrate
-        String func = "x^2";
         Function<Double, Double> function = x -> symbolic_exp(exp, x);
-
-        // Define the integration limits
 
         // Define the number of intervals (higher value gives better accuracy)
         int numIntervals = 1000000;
@@ -37,7 +38,7 @@ public class IntegralEvaluate {
         // Evaluate the integral
         double result = simp_comp_eval(function, a, b, numIntervals);
 
-        Log.d("Evaluated","The integral of f(x) = " + func + " from " + a + " to " + b + " is: " + result);
+        Log.d("Evaluated","The integral of f(x) = " + exp + " from " + a + " to " + b + " is: " + result);
         return result;
     }
 
@@ -54,5 +55,20 @@ public class IntegralEvaluate {
             System.out.println("Error in evaluating expression: " + e.getMessage());
             return 0.0; // Default value if an error occurs
         }
+    }
+    public static String symbolic_indefinite(String expression){
+        IExpr integral = new ExprEvaluator().eval("integrate("+expression+",x)");
+
+        return integral + "";
+    }
+    public static String symbolic_definite(String expression, double a, double b){
+            IExpr integral = new ExprEvaluator().eval("integrate(" + expression + ",x)");
+            String integ = "" + integral;
+            IExpr a_bound = new ExprEvaluator().eval(integ.replaceAll("x", Double.toString(a)));
+            IExpr b_bound = new ExprEvaluator().eval(integ.replaceAll("x", Double.toString(b)));
+            String result = Double.toString(Double.parseDouble("" + b_bound) - Double.parseDouble("" + a_bound));
+            String rtn = integral + "";
+            rtn = rtn.replaceAll("Log","ln");
+            return result;
     }
 }
