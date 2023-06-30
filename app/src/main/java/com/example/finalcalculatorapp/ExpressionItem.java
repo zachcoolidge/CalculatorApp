@@ -18,5 +18,7 @@ public class ExpressionItem {
         return value;
     }
 
+    public void setValue(String val){this.value = val;}
+
 }
 

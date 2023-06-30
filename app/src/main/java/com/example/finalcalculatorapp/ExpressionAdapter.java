@@ -7,7 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.matheclipse.core.interfaces.IExpr;
+
 import java.util.List;
+
+//import ru.noties.jlatexmath.JLatexMathView;
 
 public class ExpressionAdapter extends RecyclerView.Adapter<ExpressionAdapter.ViewHolder> {
 

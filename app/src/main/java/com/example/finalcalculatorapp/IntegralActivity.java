@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.TimerTask;
 
-public class IntegralActivity extends AppCompatActivity { //todo - when indefinite
+public class IntegralActivity extends AppCompatActivity { //todo - add a and b bound beside text input field, remove ans button for all screens
     static HashMap<String, Double> pre_comp_ans = new HashMap<String, Double>();
     private EditText input;
     private TextView result;
@@ -541,9 +541,6 @@ public class IntegralActivity extends AppCompatActivity { //todo - when indefini
         a_bound.setText("");
         b_bound.setText("");
         sql_database.deleteAll();
-    }
-    public void saveButtonClick(View view){
-        sql_database.insertExpression(pre_comp_ans);
     }
 
     //    public void funcButtonClick(View view){

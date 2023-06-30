@@ -122,7 +122,7 @@
             android:background="@drawable/button_selector"
             android:onClick="derButtonClick"
             android:padding="10dp"
-            android:text="dx"
+            android:text="d/dx"
             android:textSize="10dp"
             android:textStyle="normal"
             tools:ignore="DuplicateIds,TextSizeCheck" />
@@ -283,13 +283,7 @@
             android:layout_column="6"
             android:onClick="multButtonClick"
             android:text="*" />
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="50dp"
-            android:layout_row="0"
-            android:layout_column="6"
-            android:onClick="saveButtonClick"
-            android:text="⏏" />
+
 
         <Button
             android:id="@+id/button_clear"
@@ -401,7 +395,7 @@
             android:background="@drawable/button_selector"
             android:onClick="derButtonClick"
             android:padding="10dp"
-            android:text="dx"
+            android:text="d/dx"
             android:textSize="10dp"
             android:textStyle="normal"
             tools:ignore="DuplicateIds,TextSizeCheck" />

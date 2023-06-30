@@ -464,9 +464,6 @@ public void zeroButtonClick(View view) {
         result.setText("");
         sql_database.deleteAll();
     }
-    public void saveButtonClick(View view){
-        sql_database.insertExpression(pre_comp_ans);
-    }
 
 
     public void derButtonClick(View view){

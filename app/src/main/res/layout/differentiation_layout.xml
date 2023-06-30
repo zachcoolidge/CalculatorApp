@@ -25,7 +25,7 @@
         <com.google.android.material.textfield.TextInputLayout
 
             android:id="@+id/input_layout"
-            android:layout_width="360dp"
+            android:layout_width="244dp"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|start"
@@ -48,6 +48,20 @@
 
 
         </com.google.android.material.textfield.TextInputLayout>
+        <EditText
+            android:id="@+id/editText_a_bound"
+            android:hint="point"
+            android:textColorHint="@color/gray"
+            tools:ignore="TouchTargetSizeCheck"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/operator_box"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:maxLength="13"/>
 
 
         <!--
@@ -163,22 +177,10 @@
             android:onClick="expressionButtonClick"
             android:textAllCaps="false"
             android:padding="10dp"
-            android:text="exp"
+            android:text="1+2"
             android:textSize="10dp"
             android:textStyle="normal"
             tools:ignore="DuplicateIds,TextSizeCheck" />
-        <EditText
-            android:id="@+id/editText_a_bound"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_row="0"
-            android:layout_column="4"
-            android:hint="a bound"
-            android:onClick="backspaceButtonClick"
-            android:textSize="15sp"
-            tools:ignore="TouchTargetSizeCheck" />
-
-
         <Button
             android:id="@+id/button_sqrt"
             android:textAllCaps="false"
@@ -316,13 +318,6 @@
             android:layout_column="6"
             android:onClick="multButtonClick"
             android:text="*" />
-        <Button
-            android:id="@+id/button_save"
-            android:layout_width="50dp"
-            android:layout_row="0"
-            android:layout_column="6"
-            android:onClick="saveButtonClick"
-            android:text="⏏" />
 
         <Button
             android:id="@+id/button_clear"
@@ -407,8 +402,7 @@
             android:onClick="expressionButtonClick"
             android:textAllCaps="false"
             android:padding="10dp"
-            android:text="exp"
-
+            android:text="1+2"
             android:textSize="10dp"
             android:textStyle="normal"
             tools:ignore="DuplicateIds,TextSizeCheck" />

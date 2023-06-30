@@ -53,7 +53,6 @@ public class DerivativeActivity extends AppCompatActivity {
         input.requestFocus();
         input.setShowSoftInputOnFocus(false);
         a_bound = (EditText) findViewById(R.id.editText_a_bound);
-
         funcScreenLayout = findViewById(R.id.func_screen_layout);
         mainScreenLayout = findViewById(R.id.main_screen_layout);
         funcScreenLayout.setVisibility(View.GONE);
@@ -534,9 +533,7 @@ public class DerivativeActivity extends AppCompatActivity {
         a_bound.setText("");
         sql_database.deleteAll();
     }
-    public void saveButtonClick(View view){
-        sql_database.insertExpression(pre_comp_ans);
-    }
+
 
     //    public void funcButtonClick(View view){
 //

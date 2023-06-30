@@ -9,4 +9,8 @@ public class EquationEvaluate {
         IExpr eq = new ExprEvaluator().eval("Solve(" + equation + ",x)");
         return eq + "";
     }
+    public static String plugin_solve(String equation) {
+        IExpr eq = new ExprEvaluator().eval("Solve(" + equation + ",x)");
+        return eq + "";
+    }
 }
